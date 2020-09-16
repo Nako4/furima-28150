@@ -39,7 +39,7 @@ Things you may want to cover:
 
 ### Association
 has_many :items
-has_many  :purchase
+has_many :purchases
 
 
 ## itemsテーブル
@@ -48,13 +48,13 @@ has_many  :purchase
 |--------------|---------|------------------------------|
 |name          |string   |null: false                   |
 |text          |text     |null: false                   |
-|category      |list     |null: false                   |
-|condition     |list     |null: false                   |
-|who_pays_fare |list     |null: false                   |
-|consignor     |list     |null: false                   |
-|when_ship     |list     |null: false                   |
+|category      |integer  |null: false                   |
+|condition     |integer  |null: false                   |
+|who_pays_fare |integer  |null: false                   |
+|consignor     |integer  |null: false                   |
+|when_ship     |integer  |null: false                   |
 |price         |integer  |null: false                   |
-|user_id       |reference|null: false, foreign_key: true|
+|user          |reference|null: false, foreign_key: true|
 
 ### Association
 belongs to :user
@@ -63,22 +63,27 @@ has_one :purchase
 
 ## purchaseテーブル
 
-|column    |Type     |Options                       |
-|----------|---------|------------------------------|
-|user_id   |reference|null: false, foreign_key: true|
-|item_id   |reference|null: false, foreign_key: true|
+|column |Type     |Options                       |
+|-------|---------|------------------------------|
+|user   |reference|null: false, foreign_key: true|
+|item   |reference|null: false, foreign_key: true|
 
 ### Association
-belongs_to :users
-belongs_to :items
-has_one :addresses
+belongs_to :user
+belongs_to :item
+has_one :address
 
 ## addressesテーブル
 
-|column|Type|Options|
-|-------|---------|------------------------------|
-|user_id|reference|null: false, foreign_key: true|
-|address|text     |null: false                   |
+|column     |Type     |Options                       |
+|-----------|---------|------------------------------|
+|user_id    |reference|null: false, foreign_key: true|
+|postal_code|text     |null: false                   |
+|prefecture |integer  |null: false                   |
+|city       |string   |null: false                   |
+|address    |string   |null: false                   |
+|building   |string   |null: false                   |
+|phone_num  |string   |null: false                   |
 
 
 ### Association
