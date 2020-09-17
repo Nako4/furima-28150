@@ -44,17 +44,17 @@ has_many :purchases
 
 ## itemsテーブル
 
-|column        |Type     |Options                       |
-|--------------|---------|------------------------------|
-|name          |string   |null: false                   |
-|text          |text     |null: false                   |
-|category      |integer  |null: false                   |
-|condition     |integer  |null: false                   |
-|who_pays_fare |integer  |null: false                   |
-|consignor     |integer  |null: false                   |
-|when_ship     |integer  |null: false                   |
-|price         |integer  |null: false                   |
-|user          |reference|null: false, foreign_key: true|
+|column           |Type     |Options                       |
+|-----------------|---------|------------------------------|
+|name             |string   |null: false                   |
+|text             |text     |null: false                   |
+|category_id      |integer  |null: false                   |
+|condition_id     |integer  |null: false                   |
+|who_pays_fare_id |integer  |null: false                   |
+|consignor_id     |integer  |null: false                   |
+|when_ship_id     |integer  |null: false                   |
+|price            |integer  |null: false                   |
+|user             |reference|null: false, foreign_key: true|
 
 ### Association
 belongs to :user
@@ -75,15 +75,15 @@ has_one :address
 
 ## addressesテーブル
 
-|column     |Type     |Options                       |
-|-----------|---------|------------------------------|
-|user_id    |reference|null: false, foreign_key: true|
-|postal_code|text     |null: false                   |
-|prefecture |integer  |null: false                   |
-|city       |string   |null: false                   |
-|address    |string   |null: false                   |
-|building   |string   |null: false                   |
-|phone_num  |string   |null: false                   |
+|column       |Type     |Options                       |
+|-------------|---------|------------------------------|
+|user         |reference|null: false, foreign_key: true|
+|postal_code  |string   |null: false                   |
+|prefecture_id|integer  |null: false                   |
+|city         |string   |null: false                   |
+|address      |string   |null: false                   |
+|building     |string   |                              |
+|phone_num    |string   |null: false                   |
 
 
 ### Association
