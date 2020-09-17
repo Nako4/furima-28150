@@ -61,7 +61,7 @@ belongs to :user
 has_one :purchase
 
 
-## purchaseテーブル
+## purchasesテーブル
 
 |column |Type     |Options                       |
 |-------|---------|------------------------------|
@@ -77,7 +77,6 @@ has_one :address
 
 |column       |Type     |Options                       |
 |-------------|---------|------------------------------|
-|user         |reference|null: false, foreign_key: true|
 |postal_code  |string   |null: false                   |
 |prefecture_id|integer  |null: false                   |
 |city         |string   |null: false                   |
