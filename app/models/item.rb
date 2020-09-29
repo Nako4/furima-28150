@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
 
+  has_many_atacched :image
+
   with_options presence: true do
     validates :name
     validates :text
