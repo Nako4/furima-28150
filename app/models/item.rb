@@ -11,15 +11,19 @@ class Item < ApplicationRecord
   PRICE_REGEX = /\A[0-9]+\z/
 
   with_options presence: true do
-    validates :name
-    validates :text
-    validates :category_id, numericality: { other_than: 1 }
+    validates :name, length: { maximum: 40 }
+    validates :text, length: { maximum: 1000}
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}, format: {with: PRICE_REGEX}
+
+    validates :user_id
+  end
+
+  with_options presence: true, numericality: { other_than: 1 } do
+    validates :category_id
     validates :condition_id
     validates :who_pays_fare_id
     validates :consignor_id
     validates :when_ship_id
-    validates :price, numericality:[ { :greater_than_or_equal_to => 300 }, { :less_than_or_equal_to => 9999999}], format: {with: PRICE_REGEX}
-    validates :user_id
   end
 
 end
