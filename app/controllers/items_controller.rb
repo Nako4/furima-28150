@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :text, :category_id, :condition_id, :who_pays_fare_id, :consignor_id, :when_ship_id, :price, :user_id).merge(user_id: current_user.id)
     # itemを出品したuserとcurrent_userがmergeによって１まとめになっている。
     # itemの中にあるimageがストロングパラメーターとして送信していいよっていう状態。
   end
