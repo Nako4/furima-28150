@@ -8,6 +8,8 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  PRICE_REGEX = /\A[0-9]+\z/
+
   with_options presence: true do
     validates :name
     validates :text
@@ -16,7 +18,7 @@ class Item < ApplicationRecord
     validates :who_pays_fare_id
     validates :consignor_id
     validates :when_ship_id
-    validates :price
+    validates :price, numericality:[ { :greater_than_or_equal_to => 300 }, { :less_than_or_equal_to => 9999999}], format: {with: PRICE_REGEX}
     validates :user_id
   end
 
