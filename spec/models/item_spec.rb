@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
+    @item.image = fixture_file_upload('public/images/test_image.png')
   end
   describe '商品出品登録' do
     # 正常系
@@ -10,42 +11,14 @@ RSpec.describe Item, type: :model do
       it 'name,text,category_id,condition_id,who_pays_fare_id,consignor_id,when_ship_id,priceがあれば出品できる' do
         expect(@item).to be_valid
       end
-      # it 'nameが40文字以下なら出品できる' do
-      #   @item.name = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-      #   expect(@item).to be_valid
-      # end
-      # it 'textが1000文字以下なら出品できる' do
-      #   @item.text = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-      #   expect(@item).to be_valid
-      # end
-      # it 'カテゴリーが入力されていれば登録できる' do
-      #   @item.category_id = '11'
-      #   expect(@item).to be_valid
-      # end
-      # it '商品の状態が入力されていれば登録できる' do
-      #   @item.condition_id = '7'
-      #   expect(@item).to be_valid
-      # end
-      # it '配送料の負担が入力されていれば登録できる' do
-      #   @item.who_pays_fare_id = '3'
-      #   expect(@item).to be_valid
-      # end
-      # it '発送元の地域が入力されていれば登録できる' do
-      #   @item.consignor_id = '48'
-      #   expect(@item).to be_valid
-      # end
-      # it '発送までの日数が入力されていれば登録できる' do
-      #   @item.when_ship_id = '4'
-      #   expect(@item).to be_valid
-      # end
-      # it '価格が入力されていれば登録できる' do
-      #   @item.price = 4000
-      #   expect(@item).to be_valid
-      # end
     end
     # 異常系
     describe '新規登録がうまくいかない時' do
-      # 出品画像がない時
+      it '出品画像がない時' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
       it '商品名が空欄の時' do
         @item.name = ""
         @item.valid?

@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   PRICE_REGEX = /\A[0-9]+\z/
 
   with_options presence: true do
+    validates :image
     validates :name, length: { maximum: 40 }
     validates :text, length: { maximum: 1000}
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}, format: {with: PRICE_REGEX}
