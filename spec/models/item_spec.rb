@@ -42,27 +42,27 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーに入力が---の時' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it '商品の状態に入力が---の時' do
-        @item.condition_id = '1'
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
       it '配送料の負担が---の時' do
-        @item.who_pays_fare_id = '1'
+        @item.who_pays_fare_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Who pays fare must be other than 1')
       end
       it '発送元の地域が---の時' do
-        @item.consignor_id = '1'
+        @item.consignor_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Consignor must be other than 1')
       end
       it '発送までの日数が---の時' do
-        @item.when_ship_id = '1'
+        @item.when_ship_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('When ship must be other than 1')
       end
@@ -78,7 +78,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it '価格が空欄の時' do
-        @item.price = ''
+        @item.price = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank", 'Price is not a number')
       end
