@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :who_pays_fare
   belongs_to_active_hash :consignor
   belongs_to_active_hash :when_ship
+  belongs_to :user
 
   has_one_attached :image
 
