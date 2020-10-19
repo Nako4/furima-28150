@@ -1,8 +1,10 @@
 class OrdersController < ApplicationController
+  before_action :redirect_root
 
   def index
     @item = Item.find(params[:item_id])
     @user_order = UserOrder.new
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
   def new
@@ -34,6 +36,10 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency:'jpy'
     )
+ end
+
+ def redirect_root
+  redirect_to root_path unless user_signed_in?
  end
 
 end
