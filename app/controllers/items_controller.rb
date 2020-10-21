@@ -55,8 +55,6 @@ class ItemsController < ApplicationController
   end
 
   def restriction
-    if current_user.id != params[:id].to_i
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != params[:id].to_i
   end
 end

@@ -20,24 +20,26 @@ RSpec.describe UserOrder, type: :model do
     it 'tokenが空だと保存できないこと' do
       @user_order.token = nil
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Token カード情報を正しく入力してください")
+      expect(@user_order.errors.full_messages).to include('Token カード情報を正しく入力してください')
     end
     it 'postal_codeが空だと保存できないこと' do
       @user_order.postal_code = nil
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid. Include hyphen(-)")
+      expect(@user_order.errors.full_messages).to include(
+        "Postal code can't be blank", 'Postal code is invalid. Include hyphen(-)'
+      )
     end
 
     it 'postal_codeはハイフンを含んでいないと保存できないこと' do
       @user_order.postal_code = '1234567'
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+      expect(@user_order.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
     end
 
     it 'consignor_idが1だと保存できないこと' do
       @user_order.consignor_id = 1
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Consignor must be other than 1")
+      expect(@user_order.errors.full_messages).to include('Consignor must be other than 1')
     end
 
     it 'cityが空だと保存できないこと' do
@@ -61,15 +63,13 @@ RSpec.describe UserOrder, type: :model do
     it 'phone_numberが10、11文字以外だと保存できないこと' do
       @user_order.phone_number = '1234'
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include("Phone number is invalid")
+      expect(@user_order.errors.full_messages).to include('Phone number is invalid')
     end
 
     it 'phone_numberは数字以外は保存できないこと' do
-    @user_order.phone_number = '123ab123451'
-    @user_order.valid?
-    expect(@user_order.errors.full_messages).to include("Phone number is invalid")
+      @user_order.phone_number = '123ab123451'
+      @user_order.valid?
+      expect(@user_order.errors.full_messages).to include('Phone number is invalid')
     end
-
   end
-
 end
