@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     @user_order = UserOrder.new
     redirect_to root_path if current_user.id == @item.user_id
-    redirect_to root_path if @item.order.item_id != nil
+    redirect_to root_path unless @item.order.nil?
   end
 
   def new
@@ -27,7 +27,9 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:user_order).permit(:postal_code, :consignor_id, :city, :addresses, :building, :phone_number, :user_id, :item_id, :token).merge(user_id: current_user.id, price: @price)
+    params.require(:user_order).permit(
+      :postal_code, :consignor_id, :city, :addresses, :building, :phone_number, :user_id, :item_id, :token
+    ).merge(user_id: current_user.id, price: @price, token: params[:token], item_id: params[:item_id])
   end
 
   def pay_item
@@ -35,12 +37,11 @@ class OrdersController < ApplicationController
     Payjp::Charge.create(
       amount: @price,
       card: order_params[:token],
-      currency:'jpy'
+      currency: 'jpy'
     )
- end
+  end
 
- def redirect_root
-  redirect_to root_path unless user_signed_in?
- end
-
+  def redirect_root
+    redirect_to root_path unless user_signed_in?
+  end
 end
