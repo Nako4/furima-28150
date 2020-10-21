@@ -1,25 +1,22 @@
 class OrdersController < ApplicationController
   before_action :redirect_root
+  before_action :item_set, only: [:index, :create]
+  before_action :authenticate, only: [:index]
 
   def index
-    @item = Item.find(params[:item_id])
     @user_order = UserOrder.new
     redirect_to root_path if current_user.id == @item.user_id
     redirect_to root_path unless @item.order.nil?
   end
 
-  def new
-  end
-
   def create
-    @price = Item.find(params[:item_id]).price
+    @price = @item.price
     @user_order = UserOrder.new(order_params)
     if @user_order.valid?
       pay_item
       @user_order.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -43,5 +40,9 @@ class OrdersController < ApplicationController
 
   def redirect_root
     redirect_to root_path unless user_signed_in?
+  end
+
+  def item_set
+    @item = Item.find(params[:item_id])
   end
 end
