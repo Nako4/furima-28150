@@ -20,7 +20,7 @@ RSpec.describe UserOrder, type: :model do
     it 'tokenが空だと保存できないこと' do
       @user_order.token = nil
       @user_order.valid?
-      expect(@user_order.errors.full_messages).to include('Token カード情報を正しく入力してください')
+      expect(@user_order.errors.full_messages).to include("Token can't be blank")
     end
     it 'postal_codeが空だと保存できないこと' do
       @user_order.postal_code = nil
