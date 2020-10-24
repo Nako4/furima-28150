@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  #出品者でないユーザーがアクセスした時にトップページに遷移
   before_action :restriction, only: [:edit, :update, :destroy]
 
   def index
@@ -55,6 +56,7 @@ class ItemsController < ApplicationController
   end
 
   def restriction
-    redirect_to root_path if current_user.id != params[:id].to_i
+    # redirect_to root_path if current_user.id != params[:id].to_i
+    redirect_to root_path if current_user.id != @item.user_id.to_i
   end
 end
